@@ -17,10 +17,13 @@
         <main class="section">
             <div class="container" style="max-width:760px">
                 <h1 style="margin:0 0 8px">Upload your CV</h1>
-                <p style="color:var(--sub);margin:0 0 24px">PDF only for now. We’ll extract key info to match relevant
-                    roles.</p>
-
-                <form class="card" style="padding:22px">
+                <p style="color:var(--sub);margin:0 0 24px">PDF only for now. We’ll extract key info to match relevant roles. (More formats to be included in the future) <br>You can find out how to convert whatever format you have to PDF <a href="/guide">here</a>.</p>
+                
+                <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+                <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+                
+                <form class="card" style="padding:22px"
+                    method="POST" enctype="multipart/form-data" action="/upload-cv">
                     <div style="display:grid;gap:14px">
                         <div>
                             <label for="cv" style="display:block;margin-bottom:8px;color:var(--sub)">CV (PDF)</label>
@@ -30,14 +33,14 @@
                         <div>
                             <label for="track" style="display:block;margin-bottom:8px;color:var(--sub)">Track</label>
                             <select id="track" name="track"
-                                style="width:100%;padding:10px;background:#0A1022;border:1px solid var(--line);border-radius:10px;color:var(--text)">
+                                    style="width:100%;padding:10px;background:#0A1022;border:1px solid var(--line);border-radius:10px;color:var(--text)">
                                 <option value="internship">Internship</option>
                                 <option value="job">Job</option>
                             </select>
                         </div>
                         <div style="display:flex;gap:10px">
-                            <button type="button" class="btn btn-primary">Start applying</button>
-                            <a class="btn btn-ghost" href="/landing">Back to Home</a>
+                            <button type="submit" class="btn btn-primary">Start applying</button>
+                            <a class="btn btn-ghost" href="/">Back Home</a>
                         </div>
                     </div>
                 </form>

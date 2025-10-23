@@ -60,3 +60,9 @@ a{text-decoration:none;color:inherit}
 .footer-inner{height:64px;display:flex;align-items:center;justify-content:space-between}
 .footer-inner nav{display:flex;gap:16px}
 .footer-inner a{color:var(--sub)}
+
+
+.alert{padding: 1rem;margin-bottom: 1.5rem;border-radius: 10px;border: 1px solid transparent;font-size: 0.95rem;font-weight: 500;}
+.alert-success{color: #a7f3d0; /* Light green text */background-color: rgba(5, 150, 105, 0.1); /* Transparent dark green bg */border-color: #059669; /* Solid green border */}
+
+.alert-danger{color: #fecaca; /* Light red text */background-color: rgba(248, 113, 113, 0.1); /* Transparent dark red bg */border-color: #f87171; /* Solid red border */}
