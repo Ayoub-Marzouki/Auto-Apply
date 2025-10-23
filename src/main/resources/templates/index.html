@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auto-Apply • Find & Apply Smarter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/main-layout.css" />
+</head>
+
+<body th:replace="~{layouts/main-layout :: main-layout(~{::body/content()})}">
+    <div th:fragment="content">
+        <main>
+            <section class="hero">
+                <div class="container hero-inner">
+                    <div class="hero-copy">
+                        <h1>Let AI scout roles and prepare outreach while you focus on interviews.</h1>
+                        <p>Upload your CV, choose your track, and let Auto‑Apply find relevant roles, summarize postings, and
+                            prepare personalized outreach for your review.</p>
+                        <div class="hero-actions">
+                            <a class="btn btn-primary" href="/">Get started</a>
+                            <a class="btn btn-ghost" href="#how">See how it works</a>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="glow"></div>
+                        <img src="/img/hero-ui.png" alt="Auto-Apply interface mock" onerror="this.style.display='none'" />
+                    </div>
+                </div>
+            </section>
+
+            <section id="how" class="section">
+                <div class="container grid-3">
+                    <div class="card">
+                        <div class="badge">1</div>
+                        <h3>Upload</h3>
+                        <p>Drop a PDF CV. We extract key skills, education, and experience, ready for matching.</p>
+                    </div>
+                    <div class="card">
+                        <div class="badge">2</div>
+                        <h3>Discover</h3>
+                        <p>Aggregate roles from selected sources and rank them by fit to your profile.</p>
+                    </div>
+                    <div class="card">
+                        <div class="badge">3</div>
+                        <h3>Outreach</h3>
+                        <p>Review AI‑drafted emails or form responses. Keep control with approve‑to‑send.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sources" class="section muted">
+                <div class="container">
+                    <h2 class="section-title">We source from places you know</h2>
+                    <div class="logo-row">
+                        <div class="logo">LinkedIn</div>
+                        <div class="logo">Indeed</div>
+                        <div class="logo">Glassdoor</div>
+                        <div class="logo">Company sites</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section trust">
+                <div class="container grid-3">
+                    <div class="metric">
+                        <div class="num">10x</div>
+                        <div class="label">Faster screening</div>
+                    </div>
+                    <div class="metric">
+                        <div class="num">60%+</div>
+                        <div class="label">Time saved drafting</div>
+                    </div>
+                    <div class="metric">
+                        <div class="num">100%</div>
+                        <div class="label">You approve before sending</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

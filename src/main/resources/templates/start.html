@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auto‑Apply • Get Started</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/main-layout.css" />
+</head>
+
+<body th:replace="~{layouts/main-layout :: main-layout(content=~{::body/content()})}">
+    <div th:fragment="content">
+        <main class="section">
+            <div class="container" style="max-width:760px">
+                <h1 style="margin:0 0 8px">Upload your CV</h1>
+                <p style="color:var(--sub);margin:0 0 24px">PDF only for now. We’ll extract key info to match relevant
+                    roles.</p>
+
+                <form class="card" style="padding:22px">
+                    <div style="display:grid;gap:14px">
+                        <div>
+                            <label for="cv" style="display:block;margin-bottom:8px;color:var(--sub)">CV (PDF)</label>
+                            <input id="cv" name="cv" type="file" accept="application/pdf"
+                                style="width:100%;padding:10px;background:#0A1022;border:1px solid var(--line);border-radius:10px;color:var(--text)" />
+                        </div>
+                        <div>
+                            <label for="track" style="display:block;margin-bottom:8px;color:var(--sub)">Track</label>
+                            <select id="track" name="track"
+                                style="width:100%;padding:10px;background:#0A1022;border:1px solid var(--line);border-radius:10px;color:var(--text)">
+                                <option value="internship">Internship</option>
+                                <option value="job">Job</option>
+                            </select>
+                        </div>
+                        <div style="display:flex;gap:10px">
+                            <button type="button" class="btn btn-primary">Start applying</button>
+                            <a class="btn btn-ghost" href="/landing">Back to Home</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

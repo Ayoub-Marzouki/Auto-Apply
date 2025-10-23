@@ -1,0 +1,10 @@
+<footer class="site-footer" th:fragment="footer">
+  <div class="container footer-inner">
+    <div class="brand">© <span id="y"></span> Auto‑Apply</div>
+    <nav>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </nav>
+  </div>
+</footer>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
