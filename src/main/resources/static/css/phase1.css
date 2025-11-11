@@ -1,0 +1,20 @@
+/* Phase 1 overlay + spinner */
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.phase1-overlay-backdrop{position:fixed;inset:0;background:rgba(11,16,32,.86);display:none;z-index:100;align-items:center;justify-content:center;padding:20px}
+.phase1-overlay-card{width:min(720px,96vw);background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:18px 18px 14px;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.phase1-overlay-header{display:flex;gap:14px;align-items:center;margin-bottom:8px}
+.phase1-overlay-header .title{font-weight:600}
+.phase1-overlay-header .sub{color:var(--sub);font-size:.85rem}
+.spinner{width:26px;height:26px;border:4px solid var(--line);border-top-color:var(--brand2);border-radius:50%;animation:spin 1s linear infinite}
+.log-list{list-style:none;padding:8px 4px;margin:6px 0 8px;max-height:38vh;overflow:auto;display:flex;flex-direction:column;gap:8px}
+.log-step{display:flex;align-items:center;gap:10px;color:var(--sub);font-size:.9rem}
+.log-step .dot{width:10px;height:10px;border-radius:50%;background:var(--line);display:inline-block}
+.log-step.active .msg{color:var(--text)}
+.log-step.active .dot{background:var(--brand2)}
+.log-step.done .dot{background:var(--ok)}
+.log-step.error .dot{background:var(--danger)}
+.log-step.info .dot{background:var(--brand1)}
+.log-step.snippet .dot{background:var(--brand3)}
+.log-step.snippet .msg{max-height:20vh;overflow:auto;display:block;white-space:pre-wrap}
+.foot-note{color:var(--sub);font-size:.8rem;border-top:1px dashed var(--border);padding-top:8px}

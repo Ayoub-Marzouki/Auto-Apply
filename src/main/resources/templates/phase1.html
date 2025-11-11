@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auto‑Apply • Phase 1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/main-layout.css" />
+    <link rel="stylesheet" href="/css/phase1.css" />
+</head>
+
+<body th:replace="~{layouts/main-layout :: main-layout(content=~{::body/content()})}">
+    <div th:fragment="content">
+        <main class="section">
+            <div class="container" style="max-width:760px">
+                <h1 style="margin:0 0 8px">Phase 1 — Upload your CV</h1>
+                <p style="color:var(--sub);margin:0 0 24px">PDF only for now. We’ll extract key info to match relevant roles. (More formats to be included in the future) <br>You can find out how to convert whatever format you have to PDF <a href="/guide">here</a>.</p>
+                
+                <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+                <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+                
+                <form class="card" style="padding:22px"
+                    method="POST" enctype="multipart/form-data" action="/upload-cv">
+                    <input type="hidden" name="correlationId" id="correlationId" />
+                    <div style="display:grid;gap:14px">
+                        <div>
+                            <label for="cv" class="label">CV (PDF)</label>
+                            <input id="cv" name="cv" type="file" accept="application/pdf" class="input" />
+                        </div>
+                        <div style="display:flex;gap:10px">
+                            <button type="submit" class="btn btn-primary">Next</button>
+                            <a class="btn btn-ghost" href="/">Previous</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="/js/phase1.js"></script>
+</body>
+
+</html>

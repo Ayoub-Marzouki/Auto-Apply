@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auto‑Apply • Phase 3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/main-layout.css" />
+    <link rel="stylesheet" href="/css/phase3.css" />
+</head>
+
+<body th:replace="~{layouts/main-layout :: main-layout(content=~{::body/content()})}">
+    <div th:fragment="content">
+        <main class="section">
+            <div class="container" style="max-width:900px">
+                <h1 style="margin:0 0 8px">Phase 3 — Describe your target roles</h1>
+                <p class="hint" style="margin:0 0 14px;color:var(--sub)">This will help the AI understand your preferences even more and tailor searches/scoring.</p>
+
+                <div class="card" style="padding:22px;margin-bottom:18px">
+                    <h3 style="margin:0 0 10px">Recommended template</h3>
+                    <p class="intent-example"
+                        style="margin:0 0 12px">Use this pattern: I want [role type(s)] [job type: internship/full‑time] in
+                    [cities/remote]. Match at least [X%] of my skills, prioritize [Top skills]. Add constraints like salary,
+                    remote days, company size if needed.</p>
+                    <ul
+                        style="margin:0 0 14px;padding-left:18px;color:var(--sub);font-size:13px;line-height:1.4">
+                        <li>Role types (e.g. Full‑Stack Developer, Backend Java)</li>
+                        <li>Locations or Remote preference</li>
+                        <li>Skill match threshold (e.g. 70%)</li>
+                        <li>Primary skills (ranked importance)</li>
+                        <li>Optional: industries, company size, remote policy</li>
+                    </ul>
+                    <p class="hint" style="margin:0">We’ll structure this automatically for scoring.</p>
+                </div>
+
+                <div class="card" style="padding:22px">
+                    <textarea id="intentText" class="input" rows="8" th:text="${prefill}"
+                        placeholder="Describe your preferences..."></textarea>
+                </div>
+
+                <div class="actions"
+                    style="display:flex;gap:10px;justify-content:space-between;margin-top:14px">
+                    <a class="btn btn-ghost" th:href="@{'/phase2'(cvId=${cvId},profileId=${profileId})}">Previous</a>
+                    <a class="btn btn-primary" th:href="@{'/phase4'(cvId=${cvId},profileId=${profileId})}">Next</a>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/js/phase3.js"></script>
+</body>
+
+</html>

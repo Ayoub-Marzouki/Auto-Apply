@@ -1,0 +1,20 @@
+/* Phase 2 specific: skills importance list */
+.phase2 h3{font-size:1.25rem;font-weight:600}
+.phase2 .hint{font-size:.75rem;color:var(--sub)}
+.phase2-skills{display:flex;flex-direction:column;gap:14px;margin-top:14px}
+.skill-row{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--bg-alt)}
+.skill-row span{font-weight:500}
+.importance{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.importance-select{width:70px}
+.btn-sm{font-size:.7rem;padding:4px 8px}
+.btn-ghost.btn-sm{background:transparent;border:1px solid var(--border)}
+.btn-ghost.btn-sm:hover{background:var(--hover)}
+.phase2 .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.phase2 .input[readonly]{opacity:.85}
+.phase2 .actions{margin-top:32px}
+.phase2 .input{background:var(--bg)}
+.phase2 .input+.input{margin-top:6px}
+/* Languages */
+.lang-edit-list { display:flex; flex-direction:column; gap:8px; margin-bottom:10px; }
+.lang-row { display:flex; align-items:center; justify-content:space-between; padding:8px 12px; border:1px solid var(--border); border-radius:8px; background:var(--bg-alt); }
+.lang-add-wrap { display:flex; gap:10px; align-items:center; margin-top:6px; }

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auto‑Apply • Phase 4</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/main-layout.css" />
+    <link rel="stylesheet" href="/css/phase4.css" />
+</head>
+
+<body th:replace="~{layouts/main-layout :: main-layout(content=~{::body/content()})}">
+    <div th:fragment="content">
+        <main class="section">
+            <div class="container" style="max-width:980px">
+                <h1 style="margin:0 0 8px">Phase 4 — LinkedIn filters</h1>
+                <p style="color:var(--sub);margin:0 0 8px">Choose any filters you want. All fields are optional — leave blank to let the agent infer from your CV and intent.</p>
+                <p class="hint" style="margin:0 0 24px">“Save filters” stores your current selections so you can come back and edit. “Finish” saves (if possible) and exits the wizard.</p>
+
+                <form id="liFiltersForm" class="card" style="padding:22px;display:grid;gap:18px">
+                    <input type="hidden" name="profileId" th:value="${profileId}" />
+                    <div class="filters-grid">
+                        <fieldset>
+                            <legend>Date posted (timePostedRange)</legend>
+                            <label><input type="radio" name="timePostedRange" value="" checked> Any time</label>
+                            <label><input type="radio" name="timePostedRange" value="r2592000"> Past month</label>
+                            <label><input type="radio" name="timePostedRange" value="r604800"> Past week</label>
+                            <label><input type="radio" name="timePostedRange" value="r86400"> Past 24 hours</label>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Workplace (workplaceType)</legend>
+                            <label><input type="checkbox" name="workplaceType" value="1"> On‑site</label>
+                            <label><input type="checkbox" name="workplaceType" value="2"> Remote</label>
+                            <label><input type="checkbox" name="workplaceType" value="3"> Hybrid</label>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Experience level (experience)</legend>
+                            <label><input type="checkbox" name="experience" value="1"> Internship</label>
+                            <label><input type="checkbox" name="experience" value="2"> Entry level</label>
+                            <label><input type="checkbox" name="experience" value="3"> Associate</label>
+                            <label><input type="checkbox" name="experience" value="4"> Mid‑Senior</label>
+                            <label><input type="checkbox" name="experience" value="5"> Director</label>
+                            <label><input type="checkbox" name="experience" value="6"> Executive</label>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Job type (jobType)</legend>
+                            <label><input type="checkbox" name="jobType" value="F"> Full‑time</label>
+                            <label><input type="checkbox" name="jobType" value="P"> Part‑time</label>
+                            <label><input type="checkbox" name="jobType" value="C"> Contract</label>
+                            <label><input type="checkbox" name="jobType" value="I"> Internship</label>
+                            <label><input type="checkbox" name="jobType" value="O"> Other</label>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Quick toggles</legend>
+                            <label><input type="checkbox" name="applyWithLinkedin" value="true"> Easy Apply</label>
+                            <label><input type="checkbox" name="hasVerifications" value="true"> Has verifications</label>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Locations <span class="hint">(optional)</span></legend>
+                            <label class="label">Location names (comma separated)</label>
+                            <input class="input" name="locationNames" placeholder="e.g., Paris, Lyon, Remote" />
+                            <label class="label">LinkedIn location IDs (populatedPlace ids, optional)</label>
+                            <input class="input" name="locationIds" placeholder="e.g., 103693101,106672002" />
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Companies <span class="hint">(optional)</span></legend>
+                            <label class="label">Company names (comma separated)</label>
+                            <input class="input" name="companyNames" placeholder="e.g., Oracle, Societe Generale" />
+                            <label class="label">LinkedIn company IDs (optional)</label>
+                            <input class="input" name="companyIds" placeholder="e.g., 1028,1691" />
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Industries <span class="hint">(optional)</span></legend>
+                            <label class="label">LinkedIn industry IDs</label>
+                            <input class="input" name="industryIds" placeholder="e.g., 96,4,41" />
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Job functions <span class="hint">(optional)</span></legend>
+                            <label><input type="checkbox" name="function" value="it"> IT</label>
+                            <label><input type="checkbox" name="function" value="eng"> Engineering</label>
+                            <label><input type="checkbox" name="function" value="qa"> QA</label>
+                            <label><input type="checkbox" name="function" value="prjm"> Project Management</label>
+                            <label><input type="checkbox" name="function" value="anls"> Analyst</label>
+                            <label><input type="checkbox" name="function" value="mgmt"> Management</label>
+                            <label><input type="checkbox" name="function" value="sale"> Sales</label>
+                            <label><input type="checkbox" name="function" value="cnsl"> Consulting</label>
+                            <label><input type="checkbox" name="function" value="bd"> Business Development</label>
+                            <label><input type="checkbox" name="function" value="dist"> Distribution</label>
+                            <label><input type="checkbox" name="function" value="fin"> Finance</label>
+                            <label><input type="checkbox" name="function" value="ai-any"> Let AI decide (in addition to selected)</label>
+                            <label><input type="checkbox" name="function" value="other"> Other</label>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Titles <span class="hint">(optional)</span></legend>
+                            <label class="label">LinkedIn title IDs</label>
+                            <input class="input" name="titleIds" placeholder="e.g., 9,25201,2732" />
+                        </fieldset>
+                    </div>
+
+                    <div style="display:flex;gap:12px;justify-content:space-between">
+                        <a class="btn btn-ghost" th:href="@{'/phase3'(cvId=${cvId},profileId=${profileId})}">Previous</a>
+                        <div style="display:flex;gap:12px">
+                            <button type="submit" class="btn btn-primary" data-action="save">Save filters</button>
+                            <button type="button" class="btn btn-ghost" id="finishBtn">Finish</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="/js/phase4.js"></script>
+</body>
+
+</html>

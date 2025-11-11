@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auto‑Apply • Phase 2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/main-layout.css" />
+    <link rel="stylesheet" href="/css/phase2.css" />
+</head>
+
+<body th:replace="~{layouts/main-layout :: main-layout(content=~{::body/content()})}">
+    <div th:fragment="content" class="phase2">
+        <main class="section">
+            <div class="container" style="max-width:1000px" th:with="cvId=${cv.id}">
+                <div th:if="${duplicateCv}" class="alert alert-info" style="margin-bottom:16px">Duplicate CV detected — reused previous parse data.</div>
+                <!-- expose cvId for JS -->
+                <div id="cv-meta" th:attr="data-cv-id=${cvId},data-profile-id=${profileId}" style="display:none"></div>
+
+                <h1 style="margin:0 0 8px">Phase 2 — Review & edit your profile</h1>
+                <p style="color:var(--sub);margin:0 0 24px">We parsed your CV. Confirm details and adjust anything that looks off.</p>
+
+                <div class="card" style="padding:22px" th:if="${cv}">
+                    <h3>Basics</h3>
+                    <div class="grid-2">
+                        <div><label class="label">Full name</label><input class="input" th:value="${cv.fullName}" /></div>
+                        <div><label class="label">Email</label><input class="input" th:value="${cv.email}" /></div>
+                        <div><label class="label">Phone</label><input class="input" th:value="${cv.phone}" /></div>
+                        <div><label class="label">LinkedIn</label><input class="input" th:value="${cv.linkedinUrl}" /></div>
+                        <div><label class="label">GitHub</label><input class="input" th:value="${cv.githubUrl}" /></div>
+                    </div>
+                </div>
+
+                <div class="card" style="padding:22px" th:if="${cv}">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+                        <h3 style="margin:0">Technical Skills — set importance (10=most important)</h3>
+                        <p class="hint" style="margin:0">Tip: mark a few must‑haves and set 3–5 top priorities to 8–10.</p>
+                    </div>
+                    <div class="phase2-skills" id="technical-skills-list">
+                        <div th:each="skill : ${cv.technicalSkills}">
+                            <div class="skill-row">
+                                <span th:text="${skill}"></span>
+                                <div class="importance">
+                                    <label>Importance</label>
+                                    <select class="input importance-select">
+                                        <option th:each="i : ${#numbers.sequence(10,1)}" th:value="${i}" th:text="${i}"
+                                            th:selected="${i == 5}"></option>
+                                    </select>
+                                    <label style="margin-left:10px">
+                                        <input type="checkbox" class="must-have" /> Must‑have
+                                    </label>
+                                    <button type="button" class="btn btn-ghost btn-sm edit-skill">Edit</button>
+                                    <button type="button" class="btn btn-ghost btn-sm remove-skill">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:flex;gap:10px;align-items:center">
+                            <input class="input" id="new-technical-skill" placeholder="Add technical skill" style="max-width:300px" />
+                            <button type="button" class="btn btn-primary" id="add-technical-skill">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="padding:22px" th:if="${cv}">
+                    <h3>Tools & Platforms</h3>
+                    <div class="phase2-skills" id="tools-list">
+                        <div th:each="tool : ${cv.tools}">
+                            <div class="skill-row">
+                                <span th:text="${tool}"></span>
+                                <div class="importance">
+                                    <label>Importance</label>
+                                    <select class="input importance-select">
+                                        <option th:each="i : ${#numbers.sequence(10,1)}" th:value="${i}" th:text="${i}"
+                                            th:selected="${i == 5}"></option>
+                                    </select>
+                                    <label style="margin-left:10px">
+                                        <input type="checkbox" class="must-have" /> Must‑have
+                                    </label>
+                                    <button type="button" class="btn btn-ghost btn-sm edit-skill">Edit</button>
+                                    <button type="button" class="btn btn-ghost btn-sm remove-skill">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:flex;gap:10px;align-items:center">
+                            <input class="input" id="new-tool" placeholder="Add tool (Jira, Slack, etc.)" style="max-width:300px" />
+                            <button type="button" class="btn btn-primary" id="add-tool">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="padding:22px" th:if="${cv}">
+                    <h3>Soft Skills</h3>
+                    <div class="phase2-skills" id="soft-skills-list">
+                        <div th:each="skill : ${cv.softSkills}">
+                            <div class="skill-row">
+                                <span th:text="${skill}"></span>
+                                <div class="importance">
+                                    <label>Importance</label>
+                                    <select class="input importance-select">
+                                        <option th:each="i : ${#numbers.sequence(10,1)}" th:value="${i}" th:text="${i}"
+                                            th:selected="${i == 5}"></option>
+                                    </select>
+                                    <label style="margin-left:10px">
+                                        <input type="checkbox" class="must-have" /> Must‑have
+                                    </label>
+                                    <button type="button" class="btn btn-ghost btn-sm edit-skill">Edit</button>
+                                    <button type="button" class="btn btn-ghost btn-sm remove-skill">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:flex;gap:10px;align-items:center">
+                            <input class="input" id="new-soft-skill" placeholder="Add soft skill" style="max-width:300px" />
+                            <button type="button" class="btn btn-primary" id="add-soft-skill">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="padding:22px" th:if="${cv}">
+                    <h3>Languages</h3>
+                    <div class="grid-2">
+                        <div>
+                            <h4 style="margin:0 0 8px">Spoken</h4>
+                            <div id="spoken-lang-list" class="lang-edit-list">
+                                <div th:each="lang : ${cv.spokenLanguages}" class="lang-row">
+                                    <span th:text="${lang}"></span>
+                                    <div style="display:flex;gap:8px">
+                                      <button type="button" class="btn btn-ghost btn-sm edit-lang" data-type="spoken">Edit</button>
+                                      <button type="button" class="btn btn-ghost btn-sm remove-lang" data-type="spoken">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:if="${cv.spokenLanguages == null || #lists.isEmpty(cv.spokenLanguages)}" class="hint">No spoken languages detected.</div>
+                            <div class="lang-add-wrap">
+                                <input class="input" id="new-spoken-lang" placeholder="Add spoken language" />
+                                <button type="button" class="btn btn-primary btn-sm" data-add-lang="spoken">Add</button>
+                            </div>
+                        </div>
+                        <div th:if="${cv.programmingLanguages != null && !#lists.isEmpty(cv.programmingLanguages)}">
+                            <h4 style="margin:0 0 8px">Programming</h4>
+                            <div id="programming-lang-list" class="lang-edit-list">
+                                <div th:each="pl : ${cv.programmingLanguages}" class="lang-row">
+                                    <span th:text="${pl}"></span>
+                                    <div style="display:flex;gap:8px">
+                                      <button type="button" class="btn btn-ghost btn-sm edit-lang" data-type="programming">Edit</button>
+                                      <button type="button" class="btn btn-ghost btn-sm remove-lang" data-type="programming">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lang-add-wrap">
+                                <input class="input" id="new-programming-lang" placeholder="Add programming language" />
+                                <button type="button" class="btn btn-primary btn-sm" data-add-lang="programming">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="actions" style="display:flex;gap:10px;justify-content:space-between">
+                    <a class="btn btn-ghost" th:href="@{/phase1}">Previous</a>
+                    <a class="btn btn-primary" th:href="@{'/phase3'(cvId=${cv.id},profileId=${profileId})}">Next</a>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/js/phase2.js"></script>
+</body>
+
+</html>

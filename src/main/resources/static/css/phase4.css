@@ -1,0 +1,9 @@
+/* Phase 4 specific */
+.scoring-placeholder{opacity:.8;color:var(--sub)}
+
+/* Phase 4 specific (LinkedIn filters) */
+.filters-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px}
+.filters-grid fieldset{margin:0;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01))}
+.filters-grid legend{font-weight:600;font-size:14px;padding:0 6px;color:var(--text)}
+.filters-grid label{display:block;margin:6px 0;font-size:13px;color:var(--sub)}
+.filters-grid input[type='checkbox'],.filters-grid input[type='radio']{margin-right:6px;vertical-align:middle}
