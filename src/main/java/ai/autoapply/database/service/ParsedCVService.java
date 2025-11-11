@@ -33,4 +33,8 @@ public class ParsedCVService {
     public void deleteById(Long id) {
         parsedCVRepository.deleteById(id);
     }
+
+    public Optional<ParsedCV> findByCvHash(String hash) {
+        return parsedCVRepository.findByCvHash(hash);
+    }
 }
