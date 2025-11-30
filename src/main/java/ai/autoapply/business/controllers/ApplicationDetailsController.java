@@ -10,6 +10,8 @@ import ai.autoapply.database.domain.LinkedInFilters;
 import ai.autoapply.database.domain.ParsedCV;
 import ai.autoapply.database.service.ApplicationDetailsService;
 import ai.autoapply.database.service.ParsedCVService;
+import ai.autoapply.database.repositories.ApplicationDetailsRepository;
+import ai.autoapply.business.services.IntentAnalysisService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,10 +22,14 @@ public class ApplicationDetailsController {
 
     private final ApplicationDetailsService detailsService;
     private final ParsedCVService parsedCVService;
+    private final ApplicationDetailsRepository repo;
+    private final IntentAnalysisService intentAnalysisService;
 
-    public ApplicationDetailsController(ApplicationDetailsService detailsService, ParsedCVService parsedCVService) {
+    public ApplicationDetailsController(ApplicationDetailsService detailsService, ParsedCVService parsedCVService, ApplicationDetailsRepository repo, IntentAnalysisService intentAnalysisService) {
         this.detailsService = detailsService;
         this.parsedCVService = parsedCVService;
+        this.repo = repo;
+        this.intentAnalysisService = intentAnalysisService;
     }
 
     @PostMapping("/profiles")
@@ -46,7 +52,15 @@ public class ApplicationDetailsController {
         if(opt.isEmpty()) return ResponseEntity.notFound().build();
         var d = opt.get();
         d.setIntentText(req.intentText);
-        d.setStructuredIntentJson(req.structuredIntentJson);
+        
+        // If structured intent is not provided, try to analyze it with AI
+        if (req.structuredIntentJson == null || req.structuredIntentJson.isEmpty()) {
+            String analysis = intentAnalysisService.analyzeIntent(req.intentText);
+            d.setStructuredIntentJson(analysis);
+        } else {
+            d.setStructuredIntentJson(req.structuredIntentJson);
+        }
+        
         return ResponseEntity.ok(detailsService.update(d));
     }
 
@@ -87,6 +101,44 @@ public class ApplicationDetailsController {
         return ResponseEntity.ok(new ProfileBundle(cv, profile));
     }
 
+    // New: bind/unbind and lookup by agent binding id
+    @PostMapping("/profiles/{id}/bind")
+    public ResponseEntity<ApplicationDetails> bindAgent(@PathVariable Long id, @RequestBody BindRequest req){
+        var opt = detailsService.getById(id);
+        if(opt.isEmpty()) return ResponseEntity.notFound().build();
+        var d = opt.get();
+        d.setAgentBindingId(req.bindingId);
+        return ResponseEntity.ok(detailsService.update(d));
+    }
+
+    @DeleteMapping("/profiles/{id}/bind")
+    public ResponseEntity<Void> unbindAgent(@PathVariable Long id){
+        var opt = detailsService.getById(id);
+        if(opt.isEmpty()) return ResponseEntity.notFound().build();
+        var d = opt.get();
+        d.setAgentBindingId(null);
+        detailsService.update(d);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/profiles/by-binding/{bindingId}")
+    public ResponseEntity<ProfileBundle> getByBinding(@PathVariable String bindingId){
+        var opt = repo.findByAgentBindingId(bindingId);
+        if(opt.isEmpty()) return ResponseEntity.notFound().build();
+        var profile = opt.get();
+        var cv = parsedCVService.getParsedCVById(profile.getParsedCvId()).orElse(null);
+        return ResponseEntity.ok(new ProfileBundle(cv, profile));
+    }
+
+    @GetMapping("/profiles/recent")
+    public ResponseEntity<ProfileBundle> getMostRecent(){
+        var opt = repo.findFirstByOrderByUpdatedAtDesc();
+        if(opt.isEmpty()) return ResponseEntity.notFound().build();
+        var profile = opt.get();
+        var cv = parsedCVService.getParsedCVById(profile.getParsedCvId()).orElse(null);
+        return ResponseEntity.ok(new ProfileBundle(cv, profile));
+    }
+
     @Data @AllArgsConstructor @NoArgsConstructor
     public static class CreateProfileRequest { public Long cvId; public String profileName; }
     @Data @AllArgsConstructor @NoArgsConstructor
@@ -95,4 +147,6 @@ public class ApplicationDetailsController {
     public static class LangPayload { public List<String> spokenLanguages; public List<String> programmingLanguages; }
     @Data @AllArgsConstructor @NoArgsConstructor
     public static class ProfileBundle { public ParsedCV cv; public ApplicationDetails profile; }
+    @Data @AllArgsConstructor @NoArgsConstructor
+    public static class BindRequest { public String bindingId; }
 }
