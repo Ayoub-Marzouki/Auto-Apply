@@ -17,11 +17,13 @@
     <div th:fragment="content">
         <main class="section">
             <div class="container" style="max-width:900px">
-                <h1 style="margin:0 0 8px">Phase 3 — Describe your target roles</h1>
+                <h1 style="margin:0 0 8px">Phase 3 — Describe your target roles (Important!)</h1>
                 <p class="hint" style="margin:0 0 14px;color:var(--sub)">This will help the AI understand your preferences even more and tailor searches/scoring.</p>
 
                 <div class="card" style="padding:22px;margin-bottom:18px">
                     <h3 style="margin:0 0 10px">Recommended template</h3>
+                    <p>This is the phase that is responsible for determining what job roles to search for! Read the following carefully! </p>
+                    <br>
                     <p class="intent-example"
                         style="margin:0 0 12px">Use this pattern: I want [role type(s)] [job type: internship/full‑time] in
                     [cities/remote]. Match at least [X%] of my skills, prioritize [Top skills]. Add constraints like salary,
@@ -32,7 +34,7 @@
                         <li>Locations or Remote preference</li>
                         <li>Skill match threshold (e.g. 70%)</li>
                         <li>Primary skills (ranked importance)</li>
-                        <li>Optional: industries, company size, remote policy</li>
+                        <li><strong>Tip:</strong> If you want multilingual searches, explicitly ask for it (e.g., "Search for 'Full Stack' in English and 'Développeur Full Stack' in French").</li>
                     </ul>
                     <p class="hint" style="margin:0">We’ll structure this automatically for scoring.</p>
                 </div>
@@ -49,6 +51,13 @@
                 </div>
             </div>
         </main>
+        
+        <!-- Simple Overlay -->
+        <div id="phase3-overlay" class="phase3-overlay">
+            <div class="phase3-spinner"></div>
+            <div style="font-weight:500;color:#333">Analyzing your intent with AI…</div>
+            <div style="font-size:13px;color:#666;margin-top:6px">This might take a few seconds.</div>
+        </div>
     </div>
     <script src="/js/phase3.js"></script>
 </body>
