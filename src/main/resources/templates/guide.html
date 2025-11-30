@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Auto‑Apply • Get Started</title>
+    <title>Auto‑Apply • Guide</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
@@ -15,9 +15,70 @@
 <body th:replace="~{layouts/main-layout :: main-layout(content=~{::body/content()})}">
     <div th:fragment="content">
         <main class="section">
-            <h1>How to convert into a PDF</h1>
+            <div class="container" style="max-width:800px">
+                <h1 style="margin:0 0 16px">CV Guide</h1>
+                
+                <div class="card" style="padding:22px;margin-bottom:20px">
+                    <h2 style="margin:0 0 12px">How to Convert Your CV to PDF</h2>
+                    <div style="color:var(--sub);line-height:1.6">
+                        <h3 style="margin:16px 0 8px">From Microsoft Word:</h3>
+                        <ol style="padding-left:20px;margin:0 0 16px">
+                            <li>Open your CV in Microsoft Word</li>
+                            <li>Click <strong>File → Save As</strong></li>
+                            <li>Choose <strong>PDF</strong> from the file type dropdown</li>
+                            <li>Click <strong>Save</strong></li>
+                        </ol>
 
-            <h1>How to make a proper CV</h1>
+                        <h3 style="margin:16px 0 8px">From Google Docs:</h3>
+                        <ol style="padding-left:20px;margin:0 0 16px">
+                            <li>Open your CV in Google Docs</li>
+                            <li>Click <strong>File → Download → PDF Document (.pdf)</strong></li>
+                            <li>The PDF will be saved to your downloads folder</li>
+                        </ol>
+
+                        <h3 style="margin:16px 0 8px">From Other Formats:</h3>
+                        <p style="margin:0">Use free online converters like <a href="https://www.ilovepdf.com" target="_blank" rel="noopener">iLovePDF</a> or <a href="https://smallpdf.com" target="_blank" rel="noopener">SmallPDF</a> to convert any document format to PDF.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="padding:22px;margin-bottom:20px">
+                    <h2 style="margin:0 0 12px">How to Make a Proper CV</h2>
+                    <div style="color:var(--sub);line-height:1.6">
+                        <h3 style="margin:16px 0 8px">Essential Information:</h3>
+                        <ul style="padding-left:20px;margin:0 0 16px">
+                            <li><strong>Contact Details:</strong> Full name, email, phone number</li>
+                            <li><strong>Professional Links:</strong> LinkedIn profile, GitHub (for tech roles), portfolio website</li>
+                            <li><strong>Work Experience:</strong> Job titles, companies, dates, and key responsibilities</li>
+                            <li><strong>Education:</strong> Degrees, institutions, graduation dates</li>
+                            <li><strong>Skills:</strong> Technical skills, tools, languages, frameworks</li>
+                        </ul>
+
+                        <h3 style="margin:16px 0 8px">Best Practices:</h3>
+                        <ul style="padding-left:20px;margin:0 0 16px">
+                            <li>Keep it to <strong>1-2 pages</strong> maximum</li>
+                            <li>Use <strong>clear section headings</strong></li>
+                            <li>List experience in <strong>reverse chronological order</strong></li>
+                            <li>Use <strong>bullet points</strong> for easy scanning</li>
+                            <li>Quantify achievements with <strong>numbers and metrics</strong> where possible</li>
+                            <li>Tailor your CV to the <strong>specific role</strong> you're applying for</li>
+                            <li>Proofread for <strong>spelling and grammar</strong> errors</li>
+                        </ul>
+
+                        <h3 style="margin:16px 0 8px">Common Mistakes to Avoid:</h3>
+                        <ul style="padding-left:20px;margin:0">
+                            <li>Including personal photos (unless specifically requested)</li>
+                            <li>Using overly creative fonts or colors that reduce readability</li>
+                            <li>Writing long paragraphs instead of concise bullet points</li>
+                            <li>Including irrelevant work experience</li>
+                            <li>Lying or exaggerating about skills or experience</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top:24px">
+                    <a class="btn btn-primary" href="/phase1">Back to Upload</a>
+                </div>
+            </div>
         </main>
     </div>
 </body>

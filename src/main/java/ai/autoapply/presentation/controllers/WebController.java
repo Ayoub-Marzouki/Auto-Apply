@@ -53,7 +53,7 @@ public class WebController {
             if(cv.getTechnicalSkills() != null && !cv.getTechnicalSkills().isEmpty()) {
                 topSkills = String.join(", ", cv.getTechnicalSkills().stream().limit(5).collect(Collectors.toList()));
             }
-            String prefill = "I want a \"" + (cv.getExperiences()!=null && !cv.getExperiences().isEmpty() ? "role similar to my background" : "job") + "\" kind of roles, in [City1, City2]. Match at least 70% of my skills, primarily " + topSkills + ". Remote/hybrid is acceptable.";
+            String prefill = "I want a \"" + (cv.getExperiences()!=null && !cv.getExperiences().isEmpty() ? "role similar to my background" : "job") + "\" kind of roles, in [City1, City2]. Match at least 70% of my skills, primarily " + topSkills + ". Remote/hybrid is acceptable. Go for multilingual searches.";
             model.addAttribute("prefill", prefill);
         });
         return "phase3";
