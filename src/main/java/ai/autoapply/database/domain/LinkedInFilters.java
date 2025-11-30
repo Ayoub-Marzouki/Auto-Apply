@@ -11,39 +11,37 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LinkedInFilters {
-    // Single-value
-    private String timePostedRange; // e.g., r604800
+    private String timePostedRange; 
 
-    // Multi-values as comma-separated lists to keep schema simple
-    @Column(length = 2000)
-    private String workplaceTypes;   // e.g., "1,2"
-    @Column(length = 2000)
-    private String experienceLevels; // e.g., "1,2,3"
-    @Column(length = 2000)
-    private String jobTypes;         // e.g., "F,I"
+    // Multi-values as comma-separated lists
+    @Column(columnDefinition = "TEXT")
+    private String workplaceTypes;   
+    @Column(columnDefinition = "TEXT")
+    private String experienceLevels; 
+    @Column(columnDefinition = "TEXT")
+    private String jobTypes;         
 
-    private Boolean applyWithLinkedin; // Easy Apply
+    private Boolean applyWithLinkedin; 
     private Boolean hasVerifications;
 
-    @Column(length = 2000)
-    private String locationNames;    // e.g., "Paris,Lyon,Remote"
-    @Column(length = 2000)
-    private String locationIds;      // e.g., "103693101,106672002"
+    @Column(columnDefinition = "TEXT")
+    private String locationNames;
+    @Column(columnDefinition = "TEXT")
+    private String locationIds;      
 
-    @Column(length = 2000)
+    @Column(columnDefinition = "TEXT")
     private String companyNames;
-    @Column(length = 2000)
+    @Column(columnDefinition = "TEXT")
     private String companyIds;
 
-    @Column(length = 2000)
+    @Column(columnDefinition = "TEXT")
     private String industryIds;
 
-    @Column(length = 2000)
-    private String functionCodes;    // e.g., "it,eng,ai-any,other"
+    @Column(columnDefinition = "TEXT")
+    private String functionCodes;   
 
-    @Column(length = 2000)
+    @Column(columnDefinition = "TEXT")
     private String titleIds;
 
-    // Helper to let AI expand selections
     private Boolean aiAssistFunctions; // true if "Let AI decide" is checked
 }
