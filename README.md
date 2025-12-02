@@ -12,14 +12,14 @@ The "Brain" of the Auto-Apply system. This application serves as the central dat
     *   **Phase 2:** Edit parsed data & set skill weights.
     *   **Phase 3:** Define Intent (Target Role, Location) - Analyzed by AI.
     *   **Phase 4:** Set precise LinkedIn Filters (Remote, Internship, etc.).
-*   **AI Integration:** Uses Google Gemini via Vertex AI/Spring AI to analyze intent and structure search queries.
+*   **AI Integration:** Uses **Google Gemini Free Tier** (via OpenAI compatibility layer) to analyze intent and structure search queries.
 *   **API:** Exposes a comprehensive "Profile Bundle" API for the **Auto-Apply Agent**.
 
 ## Prerequisites
 
 *   **Java 21** (JDK)
 *   **MySQL Database** (Running on localhost:3306)
-*   **Google Gemini API Key** (or Vertex AI setup)
+*   **Google Gemini API Key** (Get one for free at [Google AI Studio](https://aistudio.google.com/))
 
 ## Configuration
 
@@ -31,10 +31,11 @@ spring.datasource.url=jdbc:mysql://localhost:3306/autoapply?useSSL=false&serverT
 spring.datasource.username=root
 spring.datasource.password=your_password
 
-# Gemini AI (Example for simple API key usage, adjust for Vertex AI if needed)
-spring.ai.vertex.ai.gemini.project-id=your-project-id
-spring.ai.vertex.ai.gemini.location=us-central1
-# Or simpler OpenAI/Gemini direct integration if configured
+# Gemini AI (Free Tier)
+# Set this environment variable: GEMINI_API_KEY=your_key_from_ai_studio
+spring.ai.openai.base-url=https://generativelanguage.googleapis.com/v1beta/openai/
+spring.ai.openai.api-key=${GEMINI_API_KEY}
+spring.ai.openai.chat.options.model=gemini-1.5-flash
 ```
 
 ## Running the Application

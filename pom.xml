@@ -76,10 +76,10 @@
 			<artifactId>spring-ai-pdf-document-reader</artifactId>
 		</dependency>
 
-		<!-- Google Gemini AI -->
+		<!-- Google Gemini AI (via OpenAI compatibility for Free Tier) -->
 		<dependency>
 			<groupId>org.springframework.ai</groupId>
-			<artifactId>spring-ai-starter-model-vertex-ai-gemini</artifactId>
+			<artifactId>spring-ai-starter-model-openai</artifactId>
 	    </dependency>
 	</dependencies>
 
