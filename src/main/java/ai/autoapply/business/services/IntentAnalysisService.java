@@ -23,7 +23,7 @@ public class IntentAnalysisService {
 
         // We construct the string manually to avoid template parsing errors with JSON braces {}
         String messageText = """
-            You are a career coach expert in LinkedIn job search optimization.
+            You are a career coach expert in job search optimization for the French market.
             Analyze the following candidate's statement of intent:
             ---
             %s
@@ -31,11 +31,20 @@ public class IntentAnalysisService {
 
             Extract the following information into a valid JSON object:
             {
-              "targetRole": "A concise, standard job title (e.g., 'Software Engineer', 'Full Stack Developer')",
-              "seniority": "One of: 'intern', 'entry', 'mid', 'senior', 'lead'. Infer from context (e.g., 'student' -> 'intern'). Default to 'entry'.",
-              "keywords": ["List", "of", "5-10", "optimized", "search", "keywords", "for", "LinkedIn"],
-              "locations": ["List", "of", "locations", "mentioned"]
+              "targetRole": "A concise, standard job title in English (e.g., 'Software Engineer')",
+              "targetRoleFr": "The same role title in French (e.g., 'Développeur Full Stack')",
+              "seniority": "One of: 'intern', 'entry', 'mid', 'senior', 'lead'. Infer from context ('student', 'stage', 'stagiaire' -> 'intern'). Default to 'entry'.",
+              "keywords": ["5-10 search keywords mixing English AND French variants. For internships always include: 'stage', 'stagiaire', 'internship', 'intern'. Example: ['Stage Java', 'Java Intern', 'Stage Développeur', 'Software Engineer Intern']"],
+              "locations": ["List of locations mentioned, or empty array"],
+              "contractType": "One of: 'stage', 'alternance', 'cdi', 'cdd', 'freelance'. Default to 'stage' if context mentions internship/student.",
+              "conventionDeStage": true
             }
+
+            IMPORTANT RULES:
+            - Always include BOTH French and English variants of role keywords.
+            - If the candidate mentions 'stage', 'stagiaire', 'internship', 'intern', or is clearly a student, set seniority to 'intern' and contractType to 'stage'.
+            - If 'alternance' or 'apprentissage' is mentioned, set contractType to 'alternance'.
+            - Generate keywords that will work on LinkedIn, WTTJ, and Indeed France.
 
             Return ONLY the JSON object. Do not include markdown formatting (```json).
             """.formatted(intentText);
